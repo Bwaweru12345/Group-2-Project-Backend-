@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  savings: 9.99
+  locked_savings: 9.99
+  goal: 9.99
+  loan: 9.99
+
+two:
+  savings: 9.99
+  locked_savings: 9.99
+  goal: 9.99
+  loan: 9.99
