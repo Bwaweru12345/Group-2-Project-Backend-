@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_07_080047) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_08_081257) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.decimal "balance"
@@ -39,23 +39,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_080047) do
   end
 
   create_table "incomes", force: :cascade do |t|
-    t.date "date"
-    t.string "source"
-    t.string "description"
-    t.decimal "amount"
     t.integer "user_id", null: false
+    t.string "name"
+    t.decimal "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_incomes_on_user_id"
   end
 
   create_table "personals", force: :cascade do |t|
+    t.integer "user_id", null: false
     t.string "name"
     t.decimal "amount"
-    t.boolean "is_paid"
-    t.date "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_personals_on_user_id"
+  end
+
+  create_table "savings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.decimal "amount", precision: 10, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_savings_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -76,4 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_080047) do
 
   add_foreign_key "bills", "users"
   add_foreign_key "incomes", "users"
+  add_foreign_key "personals", "users"
+  add_foreign_key "savings", "users"
 end

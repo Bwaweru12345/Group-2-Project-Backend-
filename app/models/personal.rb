@@ -1,2 +1,4 @@
 class Personal < ApplicationRecord
-end
+    belongs_to :user
+  end
+  
