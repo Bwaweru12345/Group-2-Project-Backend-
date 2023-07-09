@@ -1,13 +1,9 @@
 class IncomesController < ApplicationController
-  before_action :set_income, only: [:index, :create, :show, :update, :destroy]
+  before_action :set_income, only: [:show, :update, :destroy]
+  skip_before_action :authorized, only: [:show]
 
   def show
-    incomes = income.find(params[:id])
-    if income
-      render json: incomes 
-    else 
-      render json: {error: "User not found"}, status: :not_found
-    end
+    render json: @income
   end
 
   def index
@@ -44,16 +40,6 @@ class IncomesController < ApplicationController
   end
 
   def set_income
-    @income = current_user.incomes.find(params[:id])
-  end
-
-  def authenticate_user
-    unless session[:user_id]
-      render json: { error: 'Unauthorized' }, status: :unauthorized
-    end
-  end
-
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @income = Income.find(params[:id])
   end
 end
