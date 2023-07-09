@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :users
+  resources :incomes
+  resources :bills, only: [:index, :create, :update, :destroy]
+  resources :personals, only: [:index, :create, :destroy]
+  resources :savings, only: [:index, :create] do
+    post 'withdraw', on: :collection
+  end
 end
